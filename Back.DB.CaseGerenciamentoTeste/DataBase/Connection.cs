@@ -82,5 +82,23 @@ namespace Back.DB.CaseGerenciamentoTeste.DataBase
 
             }
         }
+        public DataSet execQuery(SqlCommand cmd)
+        {
+            try
+            {
+                conSql.Open();
+                cmd.Connection = conSql;
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds);
+                conSql.Close();
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
     }
 }

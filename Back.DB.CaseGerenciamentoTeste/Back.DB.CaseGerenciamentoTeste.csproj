@@ -86,12 +86,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business\AuthBusiness.cs" />
+    <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="DataBase\Connection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Auth.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

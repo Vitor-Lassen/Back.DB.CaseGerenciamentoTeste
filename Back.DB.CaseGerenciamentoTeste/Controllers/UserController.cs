@@ -10,27 +10,28 @@ using System.Web.Http;
 
 namespace Back.DB.CaseGerenciamentoTeste.Controllers
 {
-    public class AuthController : ApiController
+    public class UserController : ApiController
     {
         [HttpPost]
-       // [AllowAnonymous]
-        [Route("api/auth")]
-        public HttpResponseMessage Auth(Auth auth)
+        // [AllowAnonymous]
+        [Route("api/create/user")]
+        public HttpResponseMessage CreateUser(User user)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                new AuthBusiness().Auth(ref auth);
+                new UserBusiness().CreateUser(ref user);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(JsonConvert.SerializeObject(auth));
+                response.Content = new StringContent(JsonConvert.SerializeObject(user));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.StatusCode = HttpStatusCode.InternalServerError;
                 response.Content = new StringContent(ex.Message.ToString());
             }
-            return response;  
+            return response;
         }
+
     }
 }
