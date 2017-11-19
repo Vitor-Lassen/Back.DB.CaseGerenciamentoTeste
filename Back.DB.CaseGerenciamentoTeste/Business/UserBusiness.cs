@@ -25,7 +25,6 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                     count++;
                 }
                 
-
                 Dictionary<string, object> returnQuery = conn.execComand(new UserRepository().addUser(user));
                 conn.commit();
                 user.cod = (int)returnQuery["@codUser"];
@@ -37,5 +36,47 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                 throw ex;
             }
         }
+
+        public void UpdateUser(ref User user)
+        {
+
+            try
+            {
+                UserRepository userRepository = new UserRepository();
+
+                Dictionary<string, object> returnQuery = conn.execComand(new UserRepository().updateUser(user));
+                conn.commit();
+
+
+            }
+            catch (Exception ex)
+            {
+                conn.rollBack();
+                throw ex;
+            }
+        }
+        public string ConsUserForName(string name)
+        {
+            try
+            {
+                return (conn.execQueryJson(new UserRepository().selectUserForName(name)));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public string ConsUserAllData(int cod)
+        {
+            try
+            {
+                return (conn.execQueryJson(new UserRepository().selectUserAllData(cod)));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
