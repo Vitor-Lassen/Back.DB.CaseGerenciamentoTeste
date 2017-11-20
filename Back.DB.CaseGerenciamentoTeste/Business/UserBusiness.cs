@@ -17,17 +17,17 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
             try
             {
                 UserRepository userRepository = new UserRepository();
-                user.loginUsu = (user.nomeUsu.Substring(0, 3) + "." + user.sobrenomeUsu.Split(' ').Last()).ToLower();
+                user.login_usu = (user.nome_usu.Substring(0, 3) + "." + user.sobrenome_usu.Split(' ').Last()).ToLower();
                 int count = 1;
                 while ((int)(conn.execQuery(userRepository.checkLogin(user)).Tables[0].Rows[0].ItemArray[0]) > 0)
                 {
-                    user.loginUsu = (user.nomeUsu.Substring(0, 3) + "." + user.sobrenomeUsu.Split(' ').Last() + count.ToString()).ToLower();
+                    user.login_usu = (user.nome_usu.Substring(0, 3) + "." + user.sobrenome_usu.Split(' ').Last() + count.ToString()).ToLower();
                     count++;
                 }
                 
                 Dictionary<string, object> returnQuery = conn.execComand(new UserRepository().addUser(user));
                 conn.commit();
-                user.cod = (int)returnQuery["@codUser"];
+                user.cod_usu = (int)returnQuery["@codUser"];
                     
             }
             catch (Exception ex)

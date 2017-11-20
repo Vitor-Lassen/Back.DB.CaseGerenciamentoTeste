@@ -7,13 +7,13 @@ namespace Back.DB.CaseGerenciamentoTeste.Models
 {
     public class User
     {
-        public int cod { get; set; }
-        public string nomeUsu { get; set; }
-        public string sobrenomeUsu { get; set; }
-        public string email { get; set; }
-        public string loginUsu { get; set; }
-        public string senhaUsu { get; set; }
-        public int permissaoUsu { get; set; }
-        public bool trocaSenha { get; set; }
+        public int cod_usu { get; set; }
+        public string nome_usu { get; set; }
+        public string sobrenome_usu { get; set; }
+        public string email_usu { get; set; }
+        public string login_usu { get; set; }
+        public string senha_usu { get; set; }
+        public int permissao_usu { get; set; }
+        public bool troca_senha { get; set; }
     }
 }

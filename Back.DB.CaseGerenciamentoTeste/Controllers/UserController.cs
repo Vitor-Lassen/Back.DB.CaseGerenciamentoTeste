@@ -82,7 +82,7 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
                 string returnQuery = new UserBusiness().ConsUserAllData(cod);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(returnQuery);
+                response.Content = new StringContent(returnQuery.Replace('[', ' ').Replace(']', ' '));
             }
             catch (Exception ex)
             {

@@ -21,13 +21,13 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
         {
             SqlCommand cmd = new SqlCommand("Back_DB_CGT_Create_User");
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@permissao_usu", user.permissaoUsu);
-            cmd.Parameters.AddWithValue("@nome_usu", user.nomeUsu);
-            cmd.Parameters.AddWithValue("@sobrenome_usu", user.sobrenomeUsu);
-            cmd.Parameters.AddWithValue("@email_usu", user.email);
-            cmd.Parameters.AddWithValue("@login_usu", user.loginUsu);
-            cmd.Parameters.AddWithValue("@senha_usu", user.senhaUsu);
-            cmd.Parameters.AddWithValue("@troca_senha", user.trocaSenha);
+            cmd.Parameters.AddWithValue("@permissao_usu", user.permissao_usu);
+            cmd.Parameters.AddWithValue("@nome_usu", user.nome_usu);
+            cmd.Parameters.AddWithValue("@sobrenome_usu", user.sobrenome_usu);
+            cmd.Parameters.AddWithValue("@email_usu", user.email_usu);
+            cmd.Parameters.AddWithValue("@login_usu", user.login_usu);
+            cmd.Parameters.AddWithValue("@senha_usu", user.senha_usu);
+            cmd.Parameters.AddWithValue("@troca_senha", user.troca_senha);
             cmd.Parameters.Add("@codUser", SqlDbType.Int).Direction = ParameterDirection.Output;
             return cmd;  
         }
@@ -35,13 +35,13 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
         {
             SqlCommand cmd = new SqlCommand("Back_DB_CGT_Update_User");
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@permissao_usu", user.permissaoUsu);
-            cmd.Parameters.AddWithValue("@nome_usu", user.nomeUsu);
-            cmd.Parameters.AddWithValue("@sobrenome_usu", user.sobrenomeUsu);
-            cmd.Parameters.AddWithValue("@email_usu", user.email);
-            cmd.Parameters.AddWithValue("@codUser", user.cod);
-            cmd.Parameters.AddWithValue("@senha_usu", user.senhaUsu);
-            cmd.Parameters.AddWithValue("@troca_senha", user.trocaSenha);
+            cmd.Parameters.AddWithValue("@permissao_usu", user.permissao_usu);
+            cmd.Parameters.AddWithValue("@nome_usu", user.nome_usu);
+            cmd.Parameters.AddWithValue("@sobrenome_usu", user.sobrenome_usu);
+            cmd.Parameters.AddWithValue("@email_usu", user.email_usu);
+            cmd.Parameters.AddWithValue("@cod_usu", user.cod_usu);
+            cmd.Parameters.AddWithValue("@senha_usu", user.senha_usu);
+            cmd.Parameters.AddWithValue("@troca_senha", user.troca_senha);
             return cmd;
         }
 
@@ -49,7 +49,7 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
         {
             SqlCommand cmd = new SqlCommand("Back_DB_CGT_Select_ChekUserName");
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@login_usu", user.loginUsu);
+            cmd.Parameters.AddWithValue("@login_usu", user.login_usu);
 
             return cmd;
         }
