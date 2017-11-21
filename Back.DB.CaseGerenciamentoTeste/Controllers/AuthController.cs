@@ -32,5 +32,41 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
             }
             return response;  
         }
+        [HttpPost]
+       
+        [Route("api/auth/trocasenha")]
+        public HttpResponseMessage trocaSenha(AuthTrocaSenha authTrocaSenha)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                new AuthBusiness().AuthTrocaSenha(ref authTrocaSenha);
+                if (authTrocaSenha.auth)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent("Senha Alterada!");
+                }
+                else
+                {
+                    if (authTrocaSenha.novaSenhaCoincide)
+                    {
+                        response.StatusCode = HttpStatusCode.NotAcceptable;
+                        response.Content = new StringContent("Senha  Antiga Incorreta");
+                    }
+                    else
+                    {
+                        response.StatusCode = HttpStatusCode.NotAcceptable;
+                        response.Content = new StringContent("Senhas não Coincedem");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = HttpStatusCode.InternalServerError;
+                response.Content = new StringContent(ex.Message.ToString());
+            }
+            return response;
+        }
     }
 }

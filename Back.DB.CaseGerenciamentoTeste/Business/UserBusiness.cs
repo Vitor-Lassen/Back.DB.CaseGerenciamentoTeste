@@ -17,14 +17,15 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
             try
             {
                 UserRepository userRepository = new UserRepository();
-                user.login_usu = (user.nome_usu.Substring(0, 3) + "." + user.sobrenome_usu.Split(' ').Last()).ToLower();
+                user.login_usu = (user.nome_usu+ "." + user.sobrenome_usu.Split(' ').Last()).ToLower();
                 int count = 1;
                 while ((int)(conn.execQuery(userRepository.checkLogin(user)).Tables[0].Rows[0].ItemArray[0]) > 0)
                 {
-                    user.login_usu = (user.nome_usu.Substring(0, 3) + "." + user.sobrenome_usu.Split(' ').Last() + count.ToString()).ToLower();
+                    user.login_usu = (user.nome_usu + "." + user.sobrenome_usu.Split(' ').Last() + count.ToString()).ToLower();
                     count++;
                 }
-                
+                user.senha_usu = "NUB000";
+                user.troca_senha = true;
                 Dictionary<string, object> returnQuery = conn.execComand(new UserRepository().addUser(user));
                 conn.commit();
                 user.cod_usu = (int)returnQuery["@codUser"];

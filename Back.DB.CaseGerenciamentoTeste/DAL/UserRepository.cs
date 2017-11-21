@@ -45,6 +45,19 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
             return cmd;
         }
 
+        public SqlCommand TrocaSenha(AuthTrocaSenha authTrocaSenha)
+        {
+
+            SqlCommand cmd = new SqlCommand("Back_DB_CGT_ChangePassword");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@login", authTrocaSenha.user);
+            cmd.Parameters.AddWithValue("@newSenha", authTrocaSenha.newPassword);
+            cmd.Parameters.AddWithValue("@senha", authTrocaSenha.password);
+            cmd.Parameters.Add("@auth", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            return cmd;
+        }
+
         public SqlCommand checkLogin (User user)
         {
             SqlCommand cmd = new SqlCommand("Back_DB_CGT_Select_ChekUserName");
@@ -69,5 +82,6 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
 
             return cmd;
         }
+        
     }
 }

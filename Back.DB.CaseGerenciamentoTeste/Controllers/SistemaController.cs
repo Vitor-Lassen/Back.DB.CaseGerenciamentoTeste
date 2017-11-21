@@ -10,20 +10,20 @@ using System.Web.Http;
 
 namespace Back.DB.CaseGerenciamentoTeste.Controllers
 {
-    public class UserController : ApiController
+    public class SistemaController : ApiController
     {
+
         [HttpPost]
-        // [AllowAnonymous]
-        [Route("api/user/create")]
-        public HttpResponseMessage CreateUser(User user)
+        [Route("api/sistema/create")]
+        public HttpResponseMessage CreateSistema(Sistema sistema)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                new UserBusiness().CreateUser(ref user);
+                new SistemaBusiness().CreateSistema(ref sistema);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(JsonConvert.SerializeObject(user));
+                response.Content = new StringContent(JsonConvert.SerializeObject(sistema));
             }
             catch (Exception ex)
             {
@@ -32,18 +32,18 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
             }
             return response;
         }
-        [HttpPost]
 
-        [Route("api/user/update")]
-        public HttpResponseMessage UpdateUser(User user)
+        [HttpPost]
+        [Route("api/sistema/update")]
+        public HttpResponseMessage UpdateSistema(Sistema sistema)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                new UserBusiness().UpdateUser(ref user);
+                new SistemaBusiness().UpdateSistema(ref sistema);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(JsonConvert.SerializeObject(user));
+                response.Content = new StringContent(JsonConvert.SerializeObject(sistema));
             }
             catch (Exception ex)
             {
@@ -54,13 +54,33 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
         }
 
         [HttpGet]
-        [Route("api/user/select/forname/{userName}")]
-        public HttpResponseMessage selectUserForName(string userName)
+        [Route("api/sistema/select/forname/{name}")]
+        public HttpResponseMessage selectSistemaForName(string name)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                string returnQuery= new UserBusiness().ConsUserForName(userName);
+                string returnQuery = new SistemaBusiness().ConsSistemaForName(name);
+
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(returnQuery);
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = HttpStatusCode.InternalServerError;
+                response.Content = new StringContent(ex.Message.ToString());
+            }
+            return response;
+        }
+
+        [HttpGet]
+        [Route("api/sistema/select/forsigla/{sigla}")]
+        public HttpResponseMessage selectSistemaForSigla(string sigla)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                string returnQuery = new SistemaBusiness().ConsSistemaForSigla(sigla);
 
                 response.StatusCode = HttpStatusCode.OK;
                 response.Content = new StringContent(returnQuery);
@@ -73,16 +93,16 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
             return response;
         }
         [HttpGet]
-        [Route("api/user/select/all/{cod}")]
-        public HttpResponseMessage selectUserAllData(int cod)
+        [Route("api/sistema/select/all/{cod}")]
+        public HttpResponseMessage selectSistemaAllData(int cod)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                string returnQuery = new UserBusiness().ConsUserAllData(cod);
+                string returnQuery = new SistemaBusiness().ConsSistemaAllData(cod);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(returnQuery.Replace('[', ' ').Replace(']', ' '));
+                response.Content = new StringContent(returnQuery);
             }
             catch (Exception ex)
             {
@@ -92,4 +112,5 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
             return response;
         }
     }
+
 }
