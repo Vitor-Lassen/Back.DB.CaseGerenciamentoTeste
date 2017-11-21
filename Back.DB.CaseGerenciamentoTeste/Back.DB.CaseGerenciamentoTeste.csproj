@@ -87,11 +87,14 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business\AuthBusiness.cs" />
+    <Compile Include="Business\ProjetoBusiness.cs" />
     <Compile Include="Business\SistemaBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\ProjetoController.cs" />
     <Compile Include="Controllers\SistemaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\ProjetoRepository.cs" />
     <Compile Include="DAL\SistemaRepository.cs" />
     <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="DataBase\Connection.cs" />
@@ -100,6 +103,7 @@
     </Compile>
     <Compile Include="Models\Auth.cs" />
     <Compile Include="Models\AuthTrocaSenha.cs" />
+    <Compile Include="Models\Projeto.cs" />
     <Compile Include="Models\Sistema.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
