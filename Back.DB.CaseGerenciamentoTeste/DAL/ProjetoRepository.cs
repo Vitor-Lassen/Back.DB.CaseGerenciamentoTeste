@@ -46,7 +46,7 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
         {
             SqlCommand cmd = new SqlCommand("Back_DB_CGT_Select_ProjetoForName");
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@nome_usu", nomeProj);
+            cmd.Parameters.AddWithValue("@nome_proj", nomeProj);
 
             return cmd;
         }

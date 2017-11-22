@@ -102,6 +102,25 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
                 string returnQuery = new SistemaBusiness().ConsSistemaAllData(cod);
 
                 response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(returnQuery.Replace('[', ' ').Replace(']', ' '));
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = HttpStatusCode.InternalServerError;
+                response.Content = new StringContent(ex.Message.ToString());
+            }
+            return response;
+        }
+        [HttpGet]
+        [Route("api/sistema/select/listall/")]
+        public HttpResponseMessage selectProjetoListAll()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                string returnQuery = new SistemaBusiness().ConsListAllSistemas();
+
+                response.StatusCode = HttpStatusCode.OK;
                 response.Content = new StringContent(returnQuery);
             }
             catch (Exception ex)

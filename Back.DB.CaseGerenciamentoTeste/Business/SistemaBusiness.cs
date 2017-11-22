@@ -77,5 +77,16 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                 throw ex;
             }
         }
+        public string ConsListAllSistemas()
+        {
+            try
+            {
+                return conn.execQueryJson(new SistemaRepository().selectListAllSistemas());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

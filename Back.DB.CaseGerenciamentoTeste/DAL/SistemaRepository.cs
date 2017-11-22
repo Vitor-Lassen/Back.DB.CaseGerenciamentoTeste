@@ -56,5 +56,13 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
 
             return cmd;
         }
+        public SqlCommand selectListAllSistemas()
+        {
+
+            SqlCommand cmd = new SqlCommand("Back_DB_CGT_Select_SistemaListAll");
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            return cmd;
+        }
     }
 }

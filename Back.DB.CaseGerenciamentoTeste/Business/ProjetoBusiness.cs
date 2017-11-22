@@ -73,7 +73,6 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
             catch (Exception ex)
             {
                 throw ex;
-                throw;
             }
         }
     }
