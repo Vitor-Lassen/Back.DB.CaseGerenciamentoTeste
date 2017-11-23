@@ -88,14 +88,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business\AuthBusiness.cs" />
     <Compile Include="Business\ProjetoBusiness.cs" />
+    <Compile Include="Business\ProjetoxSistemaBusiness.cs" />
     <Compile Include="Business\SistemaBusiness.cs" />
+    <Compile Include="Business\StatusTypeBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ProjetoController.cs" />
     <Compile Include="Controllers\SistemaController.cs" />
+    <Compile Include="Controllers\StatusTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\ProjetoRepository.cs" />
+    <Compile Include="DAL\ProjetoxSistemaRepository.cs" />
     <Compile Include="DAL\SistemaRepository.cs" />
+    <Compile Include="DAL\StatusTypeRepository.cs" />
     <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="DataBase\Connection.cs" />
     <Compile Include="Global.asax.cs">
@@ -104,6 +109,7 @@
     <Compile Include="Models\Auth.cs" />
     <Compile Include="Models\AuthTrocaSenha.cs" />
     <Compile Include="Models\Projeto.cs" />
+    <Compile Include="Models\ProjetoxSistema.cs" />
     <Compile Include="Models\Sistema.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
