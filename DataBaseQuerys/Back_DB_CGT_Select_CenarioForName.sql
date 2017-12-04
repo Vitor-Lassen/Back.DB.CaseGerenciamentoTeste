@@ -12,6 +12,7 @@ from case_TG.dbo.cenario c
 inner join case_TG.dbo.statustype st
 on c.cod_status_cen = st.cod_status
  where c.nome_cen like '%'+@nome_cen+'%'  and c.cod_proj_cen = @cod_proj_cen
-for json auto 
+
 end 
 
+Back_DB_CGT_Select_CenarioForName 'cen',1

@@ -1,8 +1,10 @@
 ﻿using Back.DB.CaseGerenciamentoTeste.DAL;
 using Back.DB.CaseGerenciamentoTeste.DataBase;
 using Back.DB.CaseGerenciamentoTeste.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Back.DB.CaseGerenciamentoTeste.Business
 {
@@ -46,7 +48,11 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
         {
             try
             {
-                return (conn.execQueryJson(new CenarioRepository().selectCenarioForName(name,codProj)));
+                DataSet ds = conn.execQuery(new CenarioRepository().selectCenarioForName(name, codProj));
+                dynamic response = ds;
+                return JsonConvert.SerializeObject(response);
+
+              //  return (conn.execQueryJson(new CenarioRepository().selectCenarioForName(name,codProj)));
             }
             catch (Exception ex)
             {
@@ -64,6 +70,5 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                 throw ex;
             }
         }
-  
     }
 }

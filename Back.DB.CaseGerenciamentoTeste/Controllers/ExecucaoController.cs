@@ -8,20 +8,20 @@ using System.Web.Http;
 
 namespace Back.DB.CaseGerenciamentoTeste.Controllers
 {
-    public class CenarioController : ApiController
+    public class ExecucaoController : ApiController
     {
-
         [HttpPost]
-        [Route("api/cenario/create")]
-        public HttpResponseMessage CreateCenario(Cenario cenario)
+
+        [Route("api/execucao/create")]
+        public HttpResponseMessage CreateExecucao(Execucao execucao)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                new CenarioBusiness().CreateCenario(ref cenario);
+                new ExecucaoBusiness().CreateExecucao(ref execucao);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(JsonConvert.SerializeObject(cenario));
+                response.Content = new StringContent(JsonConvert.SerializeObject(execucao));
             }
             catch (Exception ex)
             {
@@ -30,18 +30,18 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
             }
             return response;
         }
-
         [HttpPost]
-        [Route("api/cenario/update")]
-        public HttpResponseMessage UpdateCenario(Cenario cenario)
+
+        [Route("api/execucao/update")]
+        public HttpResponseMessage UpdateExecucao(Execucao execucao)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                new CenarioBusiness().UpdateCenario(ref cenario);
+                new ExecucaoBusiness().UpdateExecucao(ref execucao);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(JsonConvert.SerializeObject(cenario));
+                response.Content = new StringContent(JsonConvert.SerializeObject(execucao));
             }
             catch (Exception ex)
             {
@@ -52,34 +52,13 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
         }
 
         [HttpGet]
-        [Route("api/cenario/select/forname/{name}/{codProj}")]
-        public HttpResponseMessage selectCenarioForName(string name,int codProj)
+        [Route("api/execucao/select/all/{cod}")]
+        public HttpResponseMessage selectExecucaoAllData(int cod)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                string returnQuery = new CenarioBusiness().ConsCenarioForName(name,codProj);
-
-                response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(returnQuery);
-            }
-            catch (Exception ex)
-            {
-                response.StatusCode = HttpStatusCode.InternalServerError;
-                response.Content = new StringContent(ex.Message.ToString());
-            }
-            return response;
-        }
-
-      
-        [HttpGet]
-        [Route("api/cenario/select/all/{cod}")]
-        public HttpResponseMessage selectCenarioAllData(int cod)
-        {
-            HttpResponseMessage response = new HttpResponseMessage();
-            try
-            {
-                string returnQuery = new CenarioBusiness().ConsCenarioAllData(cod);
+                string returnQuery = new ExecucaoBusiness().ConsExecucaoAllData(cod);
 
                 response.StatusCode = HttpStatusCode.OK;
                 response.Content = new StringContent(returnQuery.Replace('[', ' ').Replace(']', ' '));
@@ -91,6 +70,6 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
             }
             return response;
         }
-   
+
     }
 }

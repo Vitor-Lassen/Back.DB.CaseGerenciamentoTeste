@@ -130,5 +130,24 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
             }
             return response;
         }
+        [HttpGet]
+        [Route("api/sistema/select/sistemasprojeto/{cod}")]
+        public HttpResponseMessage selectSistemasProjeto(int cod)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                string returnQuery = new SistemaBusiness().ConsSistemasProjeto(cod);
+
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(returnQuery);
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = HttpStatusCode.InternalServerError;
+                response.Content = new StringContent(ex.Message.ToString());
+            }
+            return response;
+        }
     }
 }

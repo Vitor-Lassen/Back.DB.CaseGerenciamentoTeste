@@ -10,7 +10,7 @@ as begin
 
 
 UPDATE [dbo].[cenario]
-   SET [cod_proj_cen] = @cod_cen
+   SET [cod_proj_cen] = @cod_proj_cen
       ,[nome_cen] = @nome_cen
       ,[descri_cen] = @descri_cen
       ,[cod_status_cen] = @cod_status_cen

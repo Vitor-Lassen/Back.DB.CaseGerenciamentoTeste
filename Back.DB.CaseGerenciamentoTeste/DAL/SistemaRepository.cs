@@ -64,5 +64,13 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
 
             return cmd;
         }
+        public SqlCommand selectSistemasProjeto(int codProj)
+        {
+            SqlCommand cmd = new SqlCommand("Back_DB_CGT_Select_SistemasProjeto");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cod_proj", codProj);
+
+            return cmd;
+        }
     }
 }

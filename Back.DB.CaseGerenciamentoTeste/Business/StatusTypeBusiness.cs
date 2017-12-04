@@ -18,5 +18,16 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                 throw ex;
             }
         }
+        public string ConsListAllStatusTypeForCod(int codStatus)
+        {
+            try
+            {
+                return conn.execQueryJson(new StatusTypeRepository().selectListAllStatusTypeForCod(codStatus));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

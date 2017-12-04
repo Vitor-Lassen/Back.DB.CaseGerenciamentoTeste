@@ -13,5 +13,14 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
 
             return cmd;
         }
+        public SqlCommand selectListAllStatusTypeForCod(int codStatus)
+        {
+
+            SqlCommand cmd = new SqlCommand("Back_DB_CGT_Select_StatusTypeForCod");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cod_status",codStatus);
+
+            return cmd;
+        }
     }
 }

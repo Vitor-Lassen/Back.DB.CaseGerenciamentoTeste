@@ -88,5 +88,16 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                 throw ex;
             }
         }
+        public string ConsSistemasProjeto(int codProj)
+        {
+            try
+            {
+                return (conn.execQueryJson(new SistemaRepository().selectSistemasProjeto(codProj)));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
