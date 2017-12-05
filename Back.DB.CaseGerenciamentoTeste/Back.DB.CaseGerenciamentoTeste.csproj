@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business\AuthBusiness.cs" />
+    <Compile Include="Business\CasoBusiness.cs" />
     <Compile Include="Business\CenarioBusiness.cs" />
     <Compile Include="Business\ExecucaoBusiness.cs" />
     <Compile Include="Business\ProjetoBusiness.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Business\StatusTypeBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CasoController.cs" />
     <Compile Include="Controllers\CenarioController.cs" />
     <Compile Include="Controllers\ExecucaoController.cs" />
     <Compile Include="Controllers\ProjetoController.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Controllers\SistemaController.cs" />
     <Compile Include="Controllers\StatusTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\CasoRepository.cs" />
     <Compile Include="DAL\CenarioRepository.cs" />
     <Compile Include="DAL\ExecucaoRepository.cs" />
     <Compile Include="DAL\ProjetoRepository.cs" />
@@ -115,6 +118,7 @@
     </Compile>
     <Compile Include="Models\Auth.cs" />
     <Compile Include="Models\AuthTrocaSenha.cs" />
+    <Compile Include="Models\Caso.cs" />
     <Compile Include="Models\Cenario.cs" />
     <Compile Include="Models\Execucao.cs" />
     <Compile Include="Models\Projeto.cs" />

@@ -1,6 +1,7 @@
 ﻿using Back.DB.CaseGerenciamentoTeste.DAL;
 using Back.DB.CaseGerenciamentoTeste.DataBase;
 using Back.DB.CaseGerenciamentoTeste.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,7 +93,8 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
         {
             try
             {
-                return (conn.execQueryJson(new SistemaRepository().selectSistemasProjeto(codProj)));
+                return JsonConvert.SerializeObject(conn.execQuery(new SistemaRepository().selectSistemasProjeto(codProj)).Tables[0]);
+                //return (conn.execQueryJson(new SistemaRepository().selectSistemasProjeto(codProj)));
             }
             catch (Exception ex)
             {
