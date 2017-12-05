@@ -37,7 +37,7 @@ namespace Back.DB.CaseGerenciamentoTeste.Controllers
                 string returnQuery = new StatusTypeBusiness().ConsListAllStatusTypeForCod(cod);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new StringContent(returnQuery);
+                response.Content = new StringContent(returnQuery.Replace("[", "").Replace("]", ""));
             }
             catch (Exception ex)
             {

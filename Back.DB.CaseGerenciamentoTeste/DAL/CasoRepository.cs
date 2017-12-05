@@ -14,13 +14,10 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
             cmd.Parameters.AddWithValue("@nome_caso", caso.nome_caso);
             cmd.Parameters.AddWithValue("@precond_caso", caso.precond_caso);
             cmd.Parameters.AddWithValue("@massadados_caso", caso.massadados_caso);
-            cmd.Parameters.AddWithValue("@resultadoesp_caso", caso.resultadoesp_caso);
-            cmd.Parameters.AddWithValue("@resultadoobt_caso", caso.resultadoobt_caso);
+            cmd.Parameters.AddWithValue("@resultesp_caso", caso.resultesp_caso);
             cmd.Parameters.AddWithValue("@cod_cen_caso", caso.cod_cen_caso);
-            cmd.Parameters.AddWithValue("@cod_def_caso", caso.cod_def_caso);
             cmd.Parameters.AddWithValue("@cod_status_caso", caso.cod_status_caso);
             cmd.Parameters.AddWithValue("@cod_usu_caso", caso.cod_usu_caso);
-            cmd.Parameters.AddWithValue("@motivo_bloq", caso.motivo_bloq);
             
             cmd.Parameters.Add("@cod_caso", SqlDbType.Int).Direction = ParameterDirection.Output;
             return cmd;
@@ -32,8 +29,8 @@ namespace Back.DB.CaseGerenciamentoTeste.DAL
             cmd.Parameters.AddWithValue("@nome_caso", caso.nome_caso);
             cmd.Parameters.AddWithValue("@precond_caso", caso.precond_caso);
             cmd.Parameters.AddWithValue("@massadados_caso", caso.massadados_caso);
-            cmd.Parameters.AddWithValue("@resultadoesp_caso", caso.resultadoesp_caso);
-            cmd.Parameters.AddWithValue("@resultadoobt_caso", caso.resultadoobt_caso);
+            cmd.Parameters.AddWithValue("@resultesp_caso", caso.resultesp_caso);
+            cmd.Parameters.AddWithValue("@resultobt_caso", caso.resultobt_caso);
             cmd.Parameters.AddWithValue("@cod_cen_caso", caso.cod_cen_caso);
             cmd.Parameters.AddWithValue("@cod_def_caso", caso.cod_def_caso);
             cmd.Parameters.AddWithValue("@cod_status_caso", caso.cod_status_caso);

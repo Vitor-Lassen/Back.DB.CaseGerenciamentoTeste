@@ -89,6 +89,7 @@
     <Compile Include="Business\AuthBusiness.cs" />
     <Compile Include="Business\CasoBusiness.cs" />
     <Compile Include="Business\CenarioBusiness.cs" />
+    <Compile Include="Business\DefeitoBusiness.cs" />
     <Compile Include="Business\ExecucaoBusiness.cs" />
     <Compile Include="Business\ProjetoBusiness.cs" />
     <Compile Include="Business\ProjetoxSistemaBusiness.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CasoController.cs" />
     <Compile Include="Controllers\CenarioController.cs" />
+    <Compile Include="Controllers\DefeitoController.cs" />
     <Compile Include="Controllers\ExecucaoController.cs" />
     <Compile Include="Controllers\ProjetoController.cs" />
     <Compile Include="Controllers\ProjetoxSistemaController.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\CasoRepository.cs" />
     <Compile Include="DAL\CenarioRepository.cs" />
+    <Compile Include="DAL\DefeitoRepository.cs" />
     <Compile Include="DAL\ExecucaoRepository.cs" />
     <Compile Include="DAL\ProjetoRepository.cs" />
     <Compile Include="DAL\ProjetoxSistemaRepository.cs" />
@@ -120,6 +123,7 @@
     <Compile Include="Models\AuthTrocaSenha.cs" />
     <Compile Include="Models\Caso.cs" />
     <Compile Include="Models\Cenario.cs" />
+    <Compile Include="Models\Defeito.cs" />
     <Compile Include="Models\Execucao.cs" />
     <Compile Include="Models\Projeto.cs" />
     <Compile Include="Models\ProjetoxSistema.cs" />

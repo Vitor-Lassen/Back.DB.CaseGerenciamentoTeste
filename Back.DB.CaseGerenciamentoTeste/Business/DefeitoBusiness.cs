@@ -1,26 +1,23 @@
 ﻿using Back.DB.CaseGerenciamentoTeste.DAL;
 using Back.DB.CaseGerenciamentoTeste.DataBase;
 using Back.DB.CaseGerenciamentoTeste.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Back.DB.CaseGerenciamentoTeste.Business
 {
-    public class CenarioBusiness
+    public class DefeitoBusiness
     {
         Connection conn = new Connection();
-        public void CreateCenario(ref Cenario cenario)
+        public void CreateDefeito(ref Defeito defeito)
         {
 
             try
             {
-                UserRepository userRepository = new UserRepository();
 
-                Dictionary<string, object> returnQuery = conn.execComand(new CenarioRepository().addCenario(cenario));
+                Dictionary<string, object> returnQuery = conn.execComand(new DefeitoRepository().addDefeito(defeito));
                 conn.commit();
-                cenario.cod_cen = (int)returnQuery["@cod_cen"];
+                defeito.cod_def = (int)returnQuery["@cod_def"];
 
             }
             catch (Exception ex)
@@ -30,12 +27,14 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
             }
         }
 
-        public void UpdateCenario(ref Cenario cenario)
+        public void UpdateDefeito(ref Defeito defeito)
         {
+
             try
             {
-                Dictionary<string, object> returnQuery = conn.execComand(new CenarioRepository().updateCenario(cenario));
+                Dictionary<string, object> returnQuery = conn.execComand(new DefeitoRepository().updateDefeito(defeito));
                 conn.commit();
+
             }
             catch (Exception ex)
             {
@@ -43,30 +42,29 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                 throw ex;
             }
         }
+     
+        public string ConsDefeitoAllData(int cod)
+        {
+            try
+            {
+                return (conn.execQueryJson(new DefeitoRepository().selectDefeitoAllData(cod)));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public string ConsDefeitoAllDataForCodCen(int cod)
+        {
+            try
+            {
+                return (conn.execQueryJson(new DefeitoRepository().selectDefeitoAllDataForCodCen(cod)));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        public string ConsCenarioForName(string name,int codProj)
-        {
-            try
-            {
-                DataSet ds = conn.execQuery(new CenarioRepository().selectCenarioForName(name, codProj));
- 
-                return JsonConvert.SerializeObject(ds.Tables[0]);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public string ConsCenarioAllData(int cod)
-        {
-            try
-            {
-                return (conn.execQueryJson(new CenarioRepository().selectCenarioAllData(cod)));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
     }
 }

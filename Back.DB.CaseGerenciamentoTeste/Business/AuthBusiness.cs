@@ -25,6 +25,7 @@ namespace Back.DB.CaseGerenciamentoTeste.Business
                     auth.trocasenha = Convert.ToBoolean(ds.Tables[0].Rows[0].ItemArray[1]);
                     auth.nomeUsu = ds.Tables[0].Rows[0].ItemArray[2].ToString();
                     auth.sobrenome = ds.Tables[0].Rows[0].ItemArray[3].ToString();
+                    auth.cod_usu = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[4]);
                 }
                 else
                 {
