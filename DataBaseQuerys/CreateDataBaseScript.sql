@@ -1,112 +1,142 @@
-create database case_TG
+CREATE TABLE STATUS_TYPE (
+    PK_STATUS_TYPE_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    STATUS_TYPE VARCHAR(15) NOT NULL
+)  ENGINE=INNODB;
 
-use case_TG
+CREATE TABLE SYSTEM (
+    PK_SYSTEM_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    NAME_SYSTEM VARCHAR(20) NOT NULL,
+    INITIALS_SYSTEM VARCHAR(5) UNIQUE NOT NULL,
+    FK_STATUS_TYPE_SYSTEM_ID INT NOT NULL
+)  ENGINE=INNODB;
 
-create table tb_status_type(
-cod_status int identity (1,1) primary key not null,
-status_type varchar(15) not null 
--- check(status_type in ('', '', '', ''))
-)
-/*1 = Baixa, 2 = Média, 3 = Alta, 4 = Muito Alta*/
+ALTER TABLE SYSTEM ADD CONSTRAINT FK_STATUS_TYPE_SYSTEM_ID FOREIGN KEY (FK_STATUS_TYPE_SYSTEM_ID) REFERENCES STATUS_TYPE (PK_STATUS_TYPE_ID);
 
-create table tb_sistema(
-cod_sis int identity (1,1) primary key not null,
-nome_sis varchar(20) not null,
-sigla_sis varchar(5) unique not null,
-cod_status_sis int foreign key references tb_status_type (cod_status) not null
-)
+CREATE TABLE PROJECT (
+    PK_PROJECT_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    NAME_PROJECT VARCHAR(20) NOT NULL,
+    GOAL_PROJECT VARCHAR(200) NOT NULL,
+    FK_STATUS_TYPE_PROJECT_ID INT NOT NULL
+)  ENGINE=INNODB;
 
-create table tb_projeto(
-cod_proj int identity (1,1) primary key not null,
-nome_proj varchar(20) not null,
-objetivo_proj varchar(200) not null,
-cod_status_proj int foreign key references tb_status_type (cod_status) not null
-)
+ALTER TABLE PROJECT ADD CONSTRAINT FK_STATUS_TYPE_PROJECT_ID FOREIGN KEY (FK_STATUS_TYPE_PROJECT_ID) REFERENCES STATUS_TYPE (PK_STATUS_TYPE_ID);
 
-create table tb_projeto_sistema(
-cod_projxsis int identity (1,1) primary key not null,
-cod_proj_projxsis int foreign key references tb_projeto (cod_proj) not null,
-cod_sis_projxsis int foreign key references tb_sistema (cod_sis) not null
-)
+CREATE TABLE PROJECT_SYSTEM (
+    PK_PROJECT_SYSTEM_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    FK_PROJECT_ID INT NOT NULL,
+    FK_SYSTEM_ID INT NOT NULL
+)  ENGINE=INNODB;
 
-create table tb_cenario(
-cod_cen int identity (1,1) primary key not null,
-cod_proj_cen int foreign key references tb_projeto (cod_proj) not null,
-nome_cen varchar(50) not null,
-descri_cen varchar(100),
-cod_status_cen int foreign key references tb_status_type (cod_status) not null
-)
+ALTER TABLE PROJECT_SYSTEM ADD CONSTRAINT FK_SYSTEM_ID FOREIGN KEY (FK_SYSTEM_ID) REFERENCES SYSTEM (PK_SYSTEM_ID);
+ALTER TABLE PROJECT_SYSTEM ADD CONSTRAINT FK_PROJECT_ID FOREIGN KEY (FK_PROJECT_ID) REFERENCES PROJECT (PK_PROJECT_ID);
 
-create table tb_tipo_permissao(
-cod_tipo_permissao int identity primary key not null,
-descricao_permissao varchar(10))
+CREATE TABLE SCENARIO (
+    PK_SCENARIO_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    FK_PROJECT_SCENARIO_ID INT NOT NULL,
+    NAME_SCENARIO VARCHAR(50) NOT NULL,
+    DESCRIPTION_SCENARIO VARCHAR(100),
+    FK_STATUS_TYPE_SCENARIO_ID INT NOT NULL
+)  ENGINE=INNODB;
 
-create table tb_usuario(
-cod_usu int identity (1,1) primary key not null,
-permissao_usu int foreign key references tb_tipo_permissao (cod_tipo_permissao) not null,
-nome_usu varchar(30) not null,	
-sobrenome_usu varchar(30) not null,
-email_usu varchar(50),
-login_usu varchar(20) not null unique,
-senha_usu varchar(15) not null,
-troca_senha bit, 
-matricula varchar (10) unique
-)
+ALTER TABLE SCENARIO ADD CONSTRAINT FK_STATUS_TYPE_SCENARIO_ID FOREIGN KEY (FK_STATUS_TYPE_SCENARIO_ID) REFERENCES STATUS_TYPE (PK_STATUS_TYPE_ID);
+ALTER TABLE SCENARIO ADD CONSTRAINT FK_PROJECT_SCENARIO_ID FOREIGN KEY (FK_PROJECT_SCENARIO_ID) REFERENCES PROJECT (PK_PROJECT_ID);
 
-create table tb_caso(
-cod_caso int identity (1,1) primary key not null,
-nome_caso varchar(50) not null,
-precond_caso varchar(200) not null, 
-massadados_caso varchar(200) not null, 
-resultesp_caso varchar(200) not null,
-resultobt_caso varchar(200),
-cod_cen_caso int foreign key references tb_cenario (cod_cen) not null,
-cod_status_caso int foreign key references tb_status_type (cod_status) not null,
-cod_usu_caso int foreign key references tb_usuario (cod_usu) not null,
-motivo_bloq varchar(50)
-)
+CREATE TABLE TYPE_PERMISSION (
+    PK_TYPE_PERMISSION_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    DESCRIPTION_PERMISSION VARCHAR(10)
+)  ENGINE=INNODB;
 
-create table tb_dependencia(
-cod_caso int foreign key references tb_caso (cod_caso) not null,
-cod_caso_dependencia int foreign key references tb_caso (cod_caso) not null
-)
+CREATE TABLE USERS (
+    PK_USERS_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    PERMISSION_USERS INT NOT NULL,
+    NAME_USERS VARCHAR(30) NOT NULL,
+    LAST_NAME_USERS VARCHAR(30) NOT NULL,
+    EMAIL_USERS VARCHAR(50),
+    LOGIN_USERS VARCHAR(20) NOT NULL UNIQUE,
+    PASSWORD_USERS VARCHAR(20) NOT NULL,
+    CHANGE_PASSWORD BIT,
+    REGISTRATION VARCHAR(10) UNIQUE
+)  ENGINE=INNODB;
 
-create table tb_execucao(
-cod_exec int identity (1,1) primary key not null,
-cod_usu_exec int foreign key references tb_usuario (cod_usu) not null,
-cod_caso_exec int foreign key references tb_caso (cod_caso) not null,
-cod_status_exec int foreign key references tb_status_type (cod_status) not null,
-observacao_exec varchar(100),
-anexo_exec varchar(30),
-data_ini_exec datetime not null,
-data_fim_exec datetime not null
-)
+CREATE TABLE CASES (
+    PK_CASES_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    NAME_CASES VARCHAR(50) NOT NULL,
+    PRECONDITION_CASES VARCHAR(200) NOT NULL,
+    DATAMASS_CASES VARCHAR(200) NOT NULL,
+    RESULT_EXPECTED_CASES VARCHAR(200) NOT NULL,
+    RESULT_GOT_CASES VARCHAR(200),
+    FK_SCENARIO_ID INT NOT NULL,
+    FK_STATUS_TYPE_CASES_ID INT NOT NULL,
+    FK_USERS_CASES_ID INT NOT NULL,
+    REASON_BLOCK VARCHAR(50)
+)  ENGINE=INNODB;
 
-create table tb_defeito(
-cod_def int identity (1,1) primary key not null,
-descri_def varchar(200),
-titulo_def varchar(50) not null,
-gravidade_def int foreign key references tb_status_type (cod_status),
-cod_status_def int foreign key references tb_status_type (cod_status) not null,
-cod_exec_def int foreign key references tb_execucao (cod_exec) not null
-)
+ALTER TABLE CASES ADD CONSTRAINT FK_SCENARIO_ID FOREIGN KEY (FK_SCENARIO_ID) REFERENCES SCENARIO (PK_SCENARIO_ID);
+ALTER TABLE CASES ADD CONSTRAINT FK_STATUS_TYPE_CASES_ID FOREIGN KEY (FK_STATUS_TYPE_CASES_ID) REFERENCES STATUS_TYPE (PK_STATUS_TYPE_ID);
+ALTER TABLE CASES ADD CONSTRAINT FK_USERS_CASES_ID FOREIGN KEY (FK_USERS_CASES_ID) REFERENCES USERS (PK_USERS_ID);
 
+CREATE TABLE DEPENDENCY (
+    FK_CASES_DEPENDENCY_ID INT NOT NULL,
+    FK_CASES_ID INT NOT NULL
+)  ENGINE=INNODB;
 
-create table tb_usuario_projeto(
-cod_usu_usuxproj int foreign key references tb_usuario (cod_usu) not null,
-cod_proj_usuxproj int foreign key references tb_projeto (cod_proj) not null
-)
+ALTER TABLE DEPENDENCY ADD PRIMARY KEY (FK_CASES_DEPENDENCY_ID, FK_CASES_ID);
 
-create table tb_passo_ct(
-cod_passo int identity (1,1) primary key not null,
-cod_caso_passo int foreign key references tb_caso (cod_caso) not null, 
-num_passo int not null,
-acao_passo varchar(250),
-result_esp_caso varchar(250)
-)
+CREATE TABLE EXECUTION (
+    PK_EXECUTION_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    FK_USERS_EXECUTION_ID INT NOT NULL,
+    FK_CASES_EXECUTION_ID INT NOT NULL,
+    FK_STATUS_TYPE_EXECUTION_ID INT NOT NULL,
+    NOTE_EXECUTION VARCHAR(100),
+    ATTACHMENT_EXECUTION VARCHAR(30),
+    DATE_START_EXECUTION DATETIME NOT NULL,
+    DATE_END_EXECUTION DATETIME NOT NULL
+)  ENGINE=INNODB;
 
-create table log_execucao(
-cod_log_exec int identity (1,1) primary key not null, 
-cod_exec int foreign key references tb_execucao (cod_exec) not null,
+ALTER TABLE EXECUTION ADD CONSTRAINT FK_USERS_EXECUTION_ID FOREIGN KEY (FK_USERS_EXECUTION_ID) REFERENCES USERS (PK_USERS_ID);
+ALTER TABLE EXECUTION ADD CONSTRAINT FK_CASES_EXECUTION_ID FOREIGN KEY (FK_CASES_EXECUTION_ID) REFERENCES CASES (PK_CASES_ID);
+ALTER TABLE EXECUTION ADD CONSTRAINT FK_STATUS_TYPE_EXECUTION_ID FOREIGN KEY (FK_STATUS_TYPE_EXECUTION_ID) REFERENCES STATUS_TYPE (PK_STATUS_TYPE_ID);
 
-)
+CREATE TABLE BUG (
+    PK_BUG_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    DESCRIPTION_BUG VARCHAR(200),
+    TYTLE_BUG VARCHAR(50) NOT NULL,
+    SEVERITY_BUG INT,
+    FK_STATUS_TYPE_BUG_ID INT NOT NULL,
+    FK_EXECUTION_BUG_ID INT NOT NULL
+)  ENGINE=INNODB;
+
+ALTER TABLE BUG ADD CONSTRAINT FK_EXECUTION_BUG_ID FOREIGN KEY (FK_EXECUTION_BUG_ID) REFERENCES EXECUTION (PK_EXECUTION_ID);
+ALTER TABLE BUG ADD CONSTRAINT FK_STATUS_TYPE_BUG_ID FOREIGN KEY (FK_STATUS_TYPE_BUG_ID) REFERENCES STATUS_TYPE (PK_STATUS_TYPE_ID);			
+
+CREATE TABLE USERS_PROJECT (
+    FK_USERS_ID INT NOT NULL,
+    FK_PROJECT_USERS_PROJECT_ID INT NOT NULL
+)  ENGINE=INNODB;
+
+ALTER TABLE USERS_PROJECT ADD PRIMARY KEY (FK_USERS_ID, FK_PROJECT_USERS_PROJECT_ID);
+
+CREATE TABLE STEP_CT (
+    PK_STEP_CT_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL AUTO_INCREMENT,
+    FK_CASES_STEP_ID INT NOT NULL,
+    NUMBER_STEP INT NOT NULL,
+    ACTION_STEP VARCHAR(250),
+    RESULT_EXPECTED_STEP VARCHAR(250)
+)  ENGINE=INNODB;
+
+ALTER TABLE STEP_CT ADD CONSTRAINT FK_CASES_STEP_ID FOREIGN KEY (FK_CASES_STEP_ID) REFERENCES CASES (PK_CASES_ID);
+
+CREATE TABLE LOG_EXECUTION (
+    PK_LOG_EXECUTION_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    FK_EXECUTION_LOG_ID INT NOT NULL
+)  ENGINE=INNODB;
+
+ALTER TABLE LOG_EXECUTION ADD CONSTRAINT FK_EXECUTION_LOG_ID FOREIGN KEY (FK_EXECUTION_LOG_ID) REFERENCES EXECUTION (PK_EXECUTION_ID);
+
+CREATE TABLE LOG_UPDATE_CASE (
+    PK_LOG_UPDATE_CASE_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    DATE_UPDATE DATETIME NOT NULL,
+    FK_USERS_LOG_UPDATE_CASE_ID INT NOT NULL
+)  ENGINE=INNODB;
+
+ALTER TABLE LOG_UPDATE_CASE ADD CONSTRAINT FK_USERS_LOG_UPDATE_CASE_ID FOREIGN KEY (FK_USERS_LOG_UPDATE_CASE_ID) REFERENCES USERS (PK_USER_ID);
